@@ -1,7 +1,7 @@
 class Link < ApplicationRecord
-  validates :url, presence: true
-
   scope :recent_first, -> { order(created_at: :desc) }
+  has_many :views, dependent: :destroy
+  validates :url, presence: true
 
   def self.find(id)
     super ShortCode.decode(id)
